@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curso-deployment
+  namespace: mauro-teste
+  labels:
+    app: curso
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curso
+  template:
+    metadata:
+      labels:
+        app: curso
+    spec:
+      containers:
+        - name: curso-deployment
+          image: mtximai/curso:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: curso-service
+  namespace: mauro-teste
+spec:
+  selector:
+    app: curso
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3005
+      targetPort: 3000
+  externalIPs:
+    - 172.22.195.153

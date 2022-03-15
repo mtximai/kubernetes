@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  app:
+    image: quay.io/keycloak/keycloak:11.0.0
+    container_name: keycloak-teste
+    environment:
+      - KEYCLOACK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_ADDR=DB_ADDR
+      - DB_VENDOR=mysql
+      - DB_DATABASE=auth
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  db:
+    build: ./.docker/mysql
+    container_name: keycloak-db
+    restart: always
+    tty: true
+    ports:
+      - "33007:3306"
+    volumes:
+      - ./.docker/dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=auth
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+

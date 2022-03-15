@@ -1,0 +1,56 @@
+mongo-secret.yaml
+----------------------------------------------------
+apiVersion: v1
+kind: secret
+metadata:
+   name: mongodb-secret
+type: Opaque
+Data:
+   mongo-root-username: dXNlcm5hbWU=
+   mongo-root-password: cGFzc3dvcmQ=
+----------------------------------------------------
+: metadata/name: a randon name
+: Opaque: default for arbitrary key-value pairs
+> echo -n 'username' | base64
+
+=> Dar um apply antes de aplicar o deployment:
+   > kubectl apply -f mogo-secret.yaml
+   > kubectl get secret
+
+
+mongo.yaml
+----------------------------------------------------
+
+      metadata:
+        labels:
+          app: mongodb
+      spec:
+        containers:
+        - name: mongodb
+          image: mongo
+          ports:
+          - containerPort: 21017
+          env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: mongo-root-username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: mongo-root-password
+  
+
+mongo-configmap.yaml
+----------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongodb-configmap
+data:
+  database_url: mongodb-service
+
+
+
