@@ -31,7 +31,6 @@ metadata:
   name: portal-service
   namespace: mauro-teste
 spec:
-  type: NodePort
   selector:
     app: portal
   ports:
