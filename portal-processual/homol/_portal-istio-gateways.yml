@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: curso-http-gateway
+  namespace: comum
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: curso-services-gateway
+  namespace: comum
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 9200
+      name: elastic
+      protocol: HTTP
+    hosts:
+      - curso.local
