@@ -1,0 +1,35 @@
+- Kubernetes Crash Course for Absolute Beginners [NEW] (30/09/21)
+- https://www.youtube.com/watch?v=s_o8dwzRlu4&t=26s
+
+- 11/09/22
+
+
+> kubectl apply -f mongo-config.yml
+
+> kubectl apply -f mongo-secret.yml
+
+> kubectl apply -f mongo.yml
+
+> kubectl apply -f webapp.yml
+
+> kubectl get all
+> kubectl get configmap
+> kubectl get secret
+
+
+> kubectl --help
+> kubectl get help
+> kubectl describe service webapp-service
+
+> kubectl logs <podName>
+
+> kubectl get node -o wide
+
+  # Observe a coluna INTERNAL-IP
+  # Browser: http://INTERNAL-IP:30100
+
+
+
+
+
+

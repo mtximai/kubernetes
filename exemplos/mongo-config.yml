@@ -1,0 +1,8 @@
+# https://www.youtube.com/watch?v=s_o8dwzRlu4&t=26s
+# 11/09/22
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+data:
+  mongo-url: mongo-service
