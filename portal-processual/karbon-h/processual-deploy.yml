@@ -5,22 +5,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: portal-deployment
-  namespace: mauro-d
+  name: processual-deployment
+  namespace: processual-h
   labels:
-    app: portal
+    app: processual
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: portal
+      app: processual
   template:
     metadata:
       labels:
-        app: portal
+        app: processual
     spec:
       containers:
-        - name: portal-deployment
+        - name: processual-deployment
           image: cloud.canister.io:5000/tcmsputds/portal-processual:1.0
           imagePullPolicy: IfNotPresent
           ports:
@@ -31,11 +31,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: portal-service
-  namespace: mauro-d
+  name: processual-service
+  namespace: processual-h
 spec:
   selector:
-    app: portal
+    app: processual
   ports:
     - name: http
       protocol: TCP
